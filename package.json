@@ -8,10 +8,14 @@
   "license": "MIT",
   "scripts": {
     "precommit": "lint-staged",
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "start:alexa": "node src/alexa/server"
   },
   "lint-staged": {
-    "*.js": ["prettier --write", "git add"]
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "alexa-app": "4.2.2",
