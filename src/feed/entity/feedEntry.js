@@ -8,19 +8,50 @@ class FeedEntry {
     this.videoUrl = videoUrl;
   }
 
+  prepareMainText(text) {
+    return text
+      .replace('#', '<phoneme alphabet="ipa" ph="ˈhæʃtæɡ">#</phoneme>.')
+      .replace(/https?:\/\/.*[\r\n]*/, '');
+  }
+
   toBriefing() {
+    // text feed
     return {
       uid: this.id,
       updateDate: this.timestamp.toISOString(),
       titleText: this.title,
-      mainText: this.content
-        .replace('#', '<phoneme alphabet="ipa" ph="ˈhæʃtæɡ">#</phoneme>.')
-        .replace(/https?:\/\/.*[\r\n]*/, ''),
+      mainText: this.prepareMainText(this.content),
+      redirectionUrl: this.url,
+    };
+  }
+
+  toAudioBriefing() {
+    // audio feed
+    return {
+      uid: this.id,
+      updateDate: this.timestamp.toISOString(),
+      titleText: this.title,
+      mainText: this.prepareMainText(this.content),
+      redirectionUrl: this.url,
+      streamUrl: `https://translate.google.com/translate_tts?q=${encodeURIComponent(
+        this.content.replace(/https?:\/\/.*[\r\n]*/, ''),
+      ).substring(0, 50)}&tl=de&client=tw-ob`,
+    };
+  }
+
+  toVideoBriefing() {
+    // video feed
+    return {
+      uid: this.id,
+      updateDate: this.timestamp.toISOString(),
+      titleText: this.title,
+      mainText: this.prepareMainText(this.content),
       redirectionUrl: this.url,
       videoUrl: this.videoUrl,
-      streamUrl: `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(
+      // ?ie=UTF-8
+      streamUrl: `https://translate.google.com/translate_tts?q=${encodeURIComponent(
         this.content.replace(/https?:\/\/.*[\r\n]*/, ''),
-      )}&tl=bn&client=tw-ob`,
+      ).substring(0, 50)}&tl=de&client=tw-ob`,
     };
   }
 
@@ -28,7 +59,7 @@ class FeedEntry {
     // classic alexa skill
     return {
       titleText: this.title,
-      mainText: this.content,
+      mainText: this.prepareMainText(this.content),
     };
   }
 }
