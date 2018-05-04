@@ -1,9 +1,10 @@
 import graphene
 
-from graphene.types import datetime
 from sqlalchemy import Column, String, Integer, DateTime
 
 from umahuesla.db import Base, BaseModelMixin
+
+from . import types
 
 
 class TweetModel(Base, BaseModelMixin):
@@ -22,7 +23,7 @@ class TweetModel(Base, BaseModelMixin):
 class Tweet(graphene.ObjectType):
 
     uid = graphene.String()
-    update_date = datetime.DateTime()
+    update_date = types.DateTime()
     title_text = graphene.String()
     main_text = graphene.String()
     stream_url = graphene.String()
