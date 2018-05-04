@@ -1,6 +1,10 @@
 # umahüsla 2018 - Alexa Skill
 
 [![umahüsla 2018 badge](https://img.shields.io/badge/umah%C3%BCsla%202018-hackathon-brightgreen.svg)](https://uh18.diin.io/)
+[![Dependencies](https://img.shields.io/david/natterstefan/umahuesla-alexa-skill.svg)](https://github.com/natterstefan/umahuesla-alexa-skill/blob/master/package.json)
+[![DevDependencies](https://img.shields.io/david/dev/natterstefan/umahuesla-alexa-skill.svg)](https://github.com/natterstefan/umahuesla-alexa-skill/blob/master/package.json)
+[![GitHub license](https://img.shields.io/github/license/natterstefan/umahuesla-alexa-skill.svg)](https://github.com/natterstefan/umahuesla-alexa-skill/blob/master/LICENCE)
+[![Twitter](https://img.shields.io/twitter/url/https/github.com/natterstefan/umahuesla-alexa-skill.svg?style=social)](https://twitter.com/intent/tweet?text=https://github.com/natterstefan/umahuesla-alexa-skill%20%23uh18)
 
 ## Setup
 
