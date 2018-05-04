@@ -10,7 +10,7 @@ const client = new Twitter({
 
 const fetchTweets = async () => {
   let params = {
-    q: '#uh18',
+    q: '#uh18 -filter:nativeretweets',
   };
   let tweets = await client.get('search/tweets.json', params);
 
@@ -20,11 +20,21 @@ const fetchTweets = async () => {
 const fetchFeed = async () => {
   let tweets = await fetchTweets();
   return tweets.statuses.map(tweet => {
+    let url = null;
+    if (
+      tweet.entities &&
+      tweet.entities.urls &&
+      tweet.entities.urls.lenght > 0
+    ) {
+      url = tweet.entities.urls[0].url;
+    }
+
     return new FeedEntry(
       tweet.id_str,
       new Date(tweet.created_at),
       `Tweet von ${tweet.user.name}`,
       tweet.text,
+      url,
     );
   });
 };
