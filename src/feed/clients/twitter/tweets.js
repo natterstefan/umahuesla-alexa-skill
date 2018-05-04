@@ -13,6 +13,7 @@ const fetchTweets = async () => {
   // Docs: https://developer.twitter.com/en/docs/tweets/search/api-reference/get-search-tweets
   let params = {
     q: '#uh18 -filter:nativeretweets',
+    tweet_mode: 'extended', // will return 280 chars, attention: use item.full_text instead of item.text
   };
   let tweets = await client.get('search/tweets.json', params);
 
@@ -46,7 +47,7 @@ const fetchFeed = async () => {
       tweet.id_str,
       new Date(tweet.created_at),
       `Tweet von ${tweet.user.name}`,
-      tweet.text,
+      tweet.full_text,
       url,
       videoUrl,
     );
