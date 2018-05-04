@@ -81,7 +81,6 @@ One can then start the alexa server with `yarn start:alexa`
 Just start the Alexa server and open http://localhost:3000/alexa/umahuesla.
 The intents and utterances are at the bottom of the test-pages.
 
-
 ## Python App Quick Guide
 
 Local environment:
@@ -103,3 +102,7 @@ Start server with `v/bin/server`. Fetches new tweets every 2 minutes (latest 15
 tweets as long as running).
 
 Server exposes on `http:/localhost:9090/gqlui`.
+
+Expose the GQL to the world by running `yarn start:python`. Optionally you can
+set the subdomain by adding `yarn start:python --subdomain test123`. This will
+result in (if subdomain is available): https://test123.localtunnel.me

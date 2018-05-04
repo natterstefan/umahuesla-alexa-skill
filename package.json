@@ -30,14 +30,12 @@
     "develop:alexa": "nodemon src/alexa/server.js",
     "precommit": "lint-staged",
     "start": "npm-run-all --parallel start:server start:alexa",
+    "start:python": "./node_modules/.bin/lt --port 9090",
     "start:server": "node src/index.js",
     "start:alexa": "node src/alexa/server.js"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.js": ["prettier --write", "git add"]
   },
   "peerDependencies": {
     "alexa-app": "4.2.2",
