@@ -18,6 +18,9 @@ class FeedEntry {
         .replace(/https?:\/\/.*[\r\n]*/, ''),
       redirectionUrl: this.url,
       videoUrl: this.videoUrl,
+      streamUrl: `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(
+        this.content.replace(/https?:\/\/.*[\r\n]*/, ''),
+      )}&tl=bn&client=tw-ob`,
     };
   }
 
