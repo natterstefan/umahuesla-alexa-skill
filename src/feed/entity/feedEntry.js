@@ -72,6 +72,15 @@ class FeedEntry {
       mainText: this.prepareMainText(this.content),
     };
   }
+
+  toVideoSkill() {
+    return {
+      // class alexa skill
+      titleText: this.title,
+      videoUrl: this.videoUrl,
+      mainText: this.prepareMainText(this.content),
+    };
+  }
 }
 
 module.exports = FeedEntry;

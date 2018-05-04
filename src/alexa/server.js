@@ -1,5 +1,6 @@
 // import the files
 const AlexaAppServer = require('alexa-app-server');
+const localtunnel = require('localtunnel');
 const dotenv = require('dotenv');
 
 // load environment variables (.env)
@@ -29,3 +30,28 @@ server.start();
 server.express.use('/probe_status', function(req, res) {
   res.send('OK');
 });
+
+// Start localtunnel as well
+if (process.env.LOCALTUNNEL_ENABLED === 'true') {
+  const serverPort = process.env.ALEXA_SERVER_PORT || '8000';
+  const serverDomain = process.env.LOCALTUNNEL_DOMAIN || 'test3000';
+  const tunnel = localtunnel(
+    serverPort,
+    { subdomain: serverDomain },
+    (err, onlineTunnel) => {
+      if (err) {
+        process.exit();
+      }
+      console.log(
+        `>> Localtunnel: alexa is available at the following URL: ${
+          onlineTunnel.url
+        }`,
+      );
+    },
+  );
+
+  tunnel.on('close', function() {
+    console.log('Localtunnel: alexa is no longer available on the web.');
+    process.exit();
+  });
+}

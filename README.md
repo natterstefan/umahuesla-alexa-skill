@@ -35,7 +35,7 @@ TWITTER_ACCESS_TOKEN_KEY=
 TWITTER_ACCESS_TOKEN_SECRET=
 ```
 
-One can then start the feed server with `yarn run start:server`
+One can then start the feed server with `yarn run start:server`.
 
 ## Alexa-Skill Setup
 
@@ -48,3 +48,7 @@ ALEXA_SERVER_DOMAIN=localhost
 ```
 
 One can then start the alexa server with `yarn start:alexa`
+
+### Intents and Utterances
+
+Just start the Alexa server and open http://localhost:3000/alexa/umahuesla. The intents and utterances are at the bottom of the test-pages.
