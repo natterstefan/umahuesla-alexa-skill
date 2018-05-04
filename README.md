@@ -18,23 +18,6 @@ Install the dependencies with
 
 Start the app (both the Feed Server and the Alexa Server) with `yarn start`.
 
-### Feed
-
-Setup the `.env` and add the following keys:
-
-```
-FEED_SERVER_PORT=8000
-```
-
-The feed is available at http://localhost:8000/feed. Attention: change the port
-accordingly if you have changed `.env`'s values.
-
-Feeds:
-
-* http://localhost:8000/feed
-* http://localhost:8000/feed_with_audio
-* http://localhost:8000/feed_with_video
-
 ## Localtunnel Setup
 
 We use [localtunnel](https://www.npmjs.com/package/localtunnel) to expose the local
@@ -54,9 +37,9 @@ LOCALTUNNEL_ALEXA_DOMAIN=alexa3000
 The localtunnel url needs to be added as the Alexa-Skill endpoint in the Alexa Skill
 settings.
 
-## Twitter Feed Setup
+## Feed & Twitter Setup
 
-Setup the `.env` and add the following keys:
+Setup the `.env` and add the following keys to setup twitter and the feed server:
 
 ```
 ## TWITTER
@@ -64,9 +47,18 @@ TWITTER_CONSUMER_KEY=
 TWITTER_CONSUMER_SECRET=
 TWITTER_ACCESS_TOKEN_KEY=
 TWITTER_ACCESS_TOKEN_SECRET=
+
+FEED_SERVER_PORT=8000
 ```
 
-One can then start the feed server with `yarn run start:server`.
+One can then start the feed server with `yarn start:server`. The feed is then
+available at http://localhost:8000/feed.
+
+Available feeds:
+
+* http://localhost:8000/feed
+* http://localhost:8000/feed_with_audio
+* http://localhost:8000/feed_with_video
 
 ## Alexa-Skill Setup
 
@@ -79,6 +71,10 @@ ALEXA_SERVER_DOMAIN=localhost
 ```
 
 One can then start the alexa server with `yarn start:alexa`
+
+### Setup Video Skill
+
+* https://developer.amazon.com/docs/custom-skills/videoapp-interface-reference.html#configure-your-skill-for-the-videoapp-directives
 
 ### Intents and Utterances
 
