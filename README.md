@@ -20,20 +20,36 @@ Start the app (both the Feed Server and the Alexa Server) with `yarn start`.
 
 ### Feed
 
-The feed is available at http://localhost:4000/feed. Attention: change the port
+Setup the `.env` and add the following keys:
+
+```
+FEED_SERVER_PORT=8000
+```
+
+The feed is available at http://localhost:8000/feed. Attention: change the port
 accordingly if you have changed `.env`'s values.
 
 Feeds:
 
-* http://localhost:4000/feed
-* http://localhost:4000/feed_with_audio
-* http://localhost:4000/feed_with_video
+* http://localhost:8000/feed
+* http://localhost:8000/feed_with_audio
+* http://localhost:8000/feed_with_video
 
 ## Localtunnel Setup
 
 We use [localtunnel](https://www.npmjs.com/package/localtunnel) to expose the local
 alexa and feed server to the world. One can configure the localtunnel Subdomain in
 the `.env` file. Otherwise the subdomain will change with every start of the localtunnel.
+
+To setup localtunnel, you need to change the following in `.env`:
+
+```
+ALEXA_SERVER_PORT=3000
+FEED_SERVER_PORT=8000
+LOCALTUNNEL_ENABLED=true
+LOCALTUNNEL_FEED_DOMAIN=feed3000
+LOCALTUNNEL_ALEXA_DOMAIN=alexa3000
+```
 
 The localtunnel url needs to be added as the Alexa-Skill endpoint in the Alexa Skill
 settings.

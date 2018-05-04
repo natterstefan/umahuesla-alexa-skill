@@ -6,7 +6,7 @@ const feed = require('../feed/feed');
 // Create a server with a host and port
 const server = Hapi.server({
   host: 'localhost',
-  port: process.env.SERVER_PORT || '8000',
+  port: process.env.FEED_SERVER_PORT || '8000',
 });
 
 // Add the route
@@ -78,7 +78,7 @@ async function start() {
 
 // Start localtunnel as well
 if (process.env.LOCALTUNNEL_ENABLED === 'true') {
-  const serverPort = process.env.SERVER_PORT || '8000';
+  const serverPort = process.env.FEED_SERVER_PORT || '8000';
   const serverDomain = process.env.LOCALTUNNEL_FEED_DOMAIN || undefined;
   const tunnel = localtunnel(
     serverPort,
