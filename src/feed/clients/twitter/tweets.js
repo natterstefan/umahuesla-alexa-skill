@@ -1,5 +1,6 @@
 const Twitter = require('twitter');
 const FeedEntry = require('../../entity/feedEntry');
+const _ = require('lodash');
 
 const client = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -29,12 +30,23 @@ const fetchFeed = async () => {
       url = tweet.entities.urls[0].url;
     }
 
+    const video = _.find(
+      _.get(tweet, 'extended_entities.media', []) || [],
+      element => element.type === 'video',
+    );
+    let videoUrl = null;
+    if (video) {
+      videoUrl =
+        video.video_info.variants[video.video_info.variants.length - 1].url;
+    }
+
     return new FeedEntry(
       tweet.id_str,
       new Date(tweet.created_at),
       `Tweet von ${tweet.user.name}`,
       tweet.text,
       url,
+      videoUrl,
     );
   });
 };

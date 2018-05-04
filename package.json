@@ -22,10 +22,12 @@
   ],
   "license": "MIT",
   "scripts": {
+    "develop": "nodemon src/index.js",
+    "develop:alexa": "nodemon src/alexa/server.js",
     "precommit": "lint-staged",
     "start": "npm-run-all --parallel start:server start:alexa",
     "start:server": "node src/index.js",
-    "start:alexa": "node src/alexa/server"
+    "start:alexa": "node src/alexa/server.js"
   },
   "lint-staged": {
     "*.js": [
@@ -43,6 +45,7 @@
     "alexa-app-server": "3.0.1",
     "dotenv": "5.0.1",
     "hapi": "17.4.0",
+    "lodash": "4.17.10",
     "npm-run-all": "4.1.2",
     "twitter": "1.7.1"
   },
