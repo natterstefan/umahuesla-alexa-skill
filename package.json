@@ -1,0 +1,13 @@
+{
+  "name": "umahuesla-alexa-skill",
+  "version": "1.0.0",
+  "description": "Alexa Ummahüsla Twitter Feed",
+  "main": "index.js",
+  "repository": "git@github.com:natterstefan/umahuesla-alexa-skill.git",
+  "author": "Philip Heimböck <philipheimboeck@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "hapi": "^17.4.0",
+    "twitter": "^1.7.1"
+  }
+}
