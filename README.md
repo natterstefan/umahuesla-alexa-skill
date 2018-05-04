@@ -8,6 +8,10 @@ Install the dependencies with
   yarn // or npm install
 ```
 
+## Start
+
+Start the app (both the Feed Server and the Alexa Server) with `yarn start`.
+
 ## Alexa-Skill Setup
 
 Setup the `.env` and add the following keys:
