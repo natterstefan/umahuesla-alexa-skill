@@ -1,4 +1,6 @@
-# umahuesla-alexa-skill
+# umahüsla 2018 - Alexa Skill
+
+[![umahüsla 2018 badge](https://img.shields.io/badge/umah%C3%BCsla%202018-hackathon-brightgreen.svg)](https://uh18.diin.io/)
 
 ## Setup
 
