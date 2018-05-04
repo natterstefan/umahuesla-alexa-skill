@@ -1,0 +1,3 @@
+CREATE BLOB TABLE files
+CLUSTERED INTO 3 SHARDS
+WITH (number_of_replicas=0)

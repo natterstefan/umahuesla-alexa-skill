@@ -80,3 +80,26 @@ One can then start the alexa server with `yarn start:alexa`
 
 Just start the Alexa server and open http://localhost:3000/alexa/umahuesla.
 The intents and utterances are at the bottom of the test-pages.
+
+
+## Python App Quick Guide
+
+Local environment:
+
+Run `./gradlew dev`
+
+Start Crate with `docker-compose up -d`.
+
+Init DB Tables with `v/bin/init_db`.
+
+Configure Env VARS:
+
+export UH_TWITTER_API_CONSUMER_KEY=...
+export UH_TWITTER_API_CONSUMER_SECRET=...
+export UH_TWITTER_API_ACCESS_TOKEN_KEY=...
+export UH_TWITTER_API_ACCESS_TOKEN_SECRET=...
+
+Start server with `v/bin/server`. Fetches new tweets every 2 minutes (latest 15
+tweets as long as running).
+
+Server exposes on `http:/localhost:9090/gqlui`.
