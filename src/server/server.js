@@ -24,7 +24,7 @@ server.route({
     path: '/feed',
     handler: async (request, h) => {
         try {
-            return await feed.getFeed();
+            return (await feed.getFeed()).map(feed => feed.toBriefing());
         } catch (e) {
             console.error(e);
             return e;

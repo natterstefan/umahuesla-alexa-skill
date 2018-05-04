@@ -17,14 +17,15 @@ const fetchTweets = async () => {
     q: "#uh18"
   };
   let tweets = await client.get('search/tweets.json', params);
-  console.log(tweets);
 
   return tweets;
 };
 
 const fetchFeed = async () => {
   let tweets = await fetchTweets();
-  return tweets.statuses.map(tweet => (new FeedEntry(tweet.created_at, tweet.text)));
+  return tweets.statuses.map(tweet => {
+    return new FeedEntry(tweet.id_str, new Date(tweet.created_at), `Tweet von ${tweet.user.name}`, tweet.text);
+  });
 };
 
 module.exports = {

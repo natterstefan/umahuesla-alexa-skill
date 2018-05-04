@@ -9,4 +9,4 @@ const fetchFeeds = async () => {
 
 module.exports = {
     getFeed: fetchFeeds
-}
+};
