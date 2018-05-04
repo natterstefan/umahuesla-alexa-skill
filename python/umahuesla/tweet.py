@@ -39,8 +39,13 @@ class Tweet(graphene.ObjectType):
         )
 
     def resolve_stream_url(self, info):
+        # gql.server is the value the export UH_GQL_SERVER
         if self._model.stream_id:
-            return f"http://localhost:9090/v1/files/{self._model.stream_id}"
+            host = info.context.registry.settings.get(
+                "gql.server",
+                "http://localhost:9090"
+            )
+            return f"{host}/v1/files/{self._model.stream_id}"
 
 
 class Query(object):

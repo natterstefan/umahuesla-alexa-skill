@@ -93,16 +93,26 @@ Init DB Tables with `v/bin/init_db`.
 
 Configure Env VARS:
 
+```
 export UH_TWITTER_API_CONSUMER_KEY=...
 export UH_TWITTER_API_CONSUMER_SECRET=...
 export UH_TWITTER_API_ACCESS_TOKEN_KEY=...
 export UH_TWITTER_API_ACCESS_TOKEN_SECRET=...
-
-Start server with `v/bin/server`. Fetches new tweets every 2 minutes (latest 15
-tweets as long as running).
-
-Server exposes on `http:/localhost:9090/gqlui`.
+```
 
 Expose the GQL to the world by running `yarn start:python`. Optionally you can
 set the subdomain by adding `yarn start:python --subdomain test123`. This will
 result in (if subdomain is available): https://test123.localtunnel.me
+
+Once the localtunnel is ready export another Env variable with the given localtunnel url.
+
+```
+export UH_GQL_SERVER=...
+```
+
+Example: export UH_GQL_SERVER="https://gql-magic-3000.localtunnel.me/"
+
+Now, start server with `v/bin/server`. Fetches new tweets every 2 minutes (latest 15
+tweets as long as running).
+
+Server exposes on `http:/localhost:9090/gqlui` and on the localtunnel url.

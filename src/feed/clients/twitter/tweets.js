@@ -55,5 +55,5 @@ const fetchFeed = async () => {
 };
 
 module.exports = {
-  fetchFeed: fetchFeed,
+  fetchFeed,
 };
