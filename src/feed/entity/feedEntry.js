@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 class FeedEntry {
   constructor(id, timestamp, title, content, url = null, videoUrl = null) {
     this.id = id;
@@ -8,10 +10,23 @@ class FeedEntry {
     this.videoUrl = videoUrl;
   }
 
-  prepareMainText(text) {
+  prepareStreamUrl(text = '') {
+    // Note: we removed ?ie=UTF-8 from the translate.google.* url
+    // Alternative: /#(.)\S*/g ==> will remove any hashtag and the text after it until the first space
+    const audioStream = `https://translate.google.com/translate_tts?q=${encodeURIComponent(
+      text.replace(/https?:\/\/.*[\r\n]*/g, '').replace(/#/g, ''),
+    )}&tl=de&client=tw-ob`;
+
+    // Google HACK: the first request will create the file, otherwise it returns 404
+    axios.get(audioStream);
+
+    return audioStream;
+  }
+
+  prepareMainText(text = '') {
     return text
-      .replace('#', '<phoneme alphabet="ipa" ph="ˈhæʃtæɡ">#</phoneme>.')
-      .replace(/https?:\/\/.*[\r\n]*/, '');
+      .replace(/#/g, '<phoneme alphabet="ipa" ph="ˈhæʃtæɡ">#</phoneme>')
+      .replace(/https?:\/\/.*[\r\n]*/g, '');
   }
 
   toBriefing() {
@@ -33,9 +48,7 @@ class FeedEntry {
       titleText: this.title,
       mainText: this.prepareMainText(this.content),
       redirectionUrl: this.url,
-      streamUrl: `https://translate.google.com/translate_tts?q=${encodeURIComponent(
-        this.content.replace(/https?:\/\/.*[\r\n]*/, ''),
-      ).substring(0, 50)}&tl=de&client=tw-ob`,
+      streamUrl: this.prepareStreamUrl(this.content),
     };
   }
 
@@ -48,10 +61,7 @@ class FeedEntry {
       mainText: this.prepareMainText(this.content),
       redirectionUrl: this.url,
       videoUrl: this.videoUrl,
-      // ?ie=UTF-8
-      streamUrl: `https://translate.google.com/translate_tts?q=${encodeURIComponent(
-        this.content.replace(/https?:\/\/.*[\r\n]*/, ''),
-      ).substring(0, 50)}&tl=de&client=tw-ob`,
+      streamUrl: this.prepareStreamUrl(this.content),
     };
   }
 
