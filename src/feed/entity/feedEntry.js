@@ -13,6 +13,7 @@ class FeedEntry {
   prepareStreamUrl(text = '') {
     // Note: we removed ?ie=UTF-8 from the translate.google.* url
     // Alternative: /#(.)\S*/g ==> will remove any hashtag and the text after it until the first space
+    // Alternative package: https://github.com/zlargon/google-tts
     const audioStream = `https://translate.google.com/translate_tts?q=${encodeURIComponent(
       text.replace(/https?:\/\/.*[\r\n]*/g, '').replace(/#/g, ''),
     )}&tl=de&client=tw-ob`;

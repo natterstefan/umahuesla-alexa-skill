@@ -23,6 +23,15 @@ Feeds:
 * http://localhost:4000/feed_with_audio
 * http://localhost:4000/feed_with_video
 
+## Localtunnel Setup
+
+We use [localtunnel](https://www.npmjs.com/package/localtunnel) to expose the local
+alexa and feed server to the world. One can configure the localtunnel Subdomain in
+the `.env` file. Otherwise the subdomain will change with every start of the localtunnel.
+
+The localtunnel url needs to be added as the Alexa-Skill endpoint in the Alexa Skill
+settings.
+
 ## Twitter Feed Setup
 
 Setup the `.env` and add the following keys:
@@ -51,4 +60,5 @@ One can then start the alexa server with `yarn start:alexa`
 
 ### Intents and Utterances
 
-Just start the Alexa server and open http://localhost:3000/alexa/umahuesla. The intents and utterances are at the bottom of the test-pages.
+Just start the Alexa server and open http://localhost:3000/alexa/umahuesla.
+The intents and utterances are at the bottom of the test-pages.

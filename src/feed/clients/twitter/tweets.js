@@ -10,6 +10,7 @@ const client = new Twitter({
 });
 
 const fetchTweets = async () => {
+  // Docs: https://developer.twitter.com/en/docs/tweets/search/api-reference/get-search-tweets
   let params = {
     q: '#uh18 -filter:nativeretweets',
   };
@@ -19,6 +20,7 @@ const fetchTweets = async () => {
 };
 
 const fetchFeed = async () => {
+  // Docs: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/extended-entities-object
   let tweets = await fetchTweets();
   return tweets.statuses.map(tweet => {
     let url = null;
