@@ -36,7 +36,11 @@ server.route({
   path: '/feed_with_audio',
   handler: async (request, h) => {
     try {
-      return (await feed.getFeed()).map(feed => feed.toAudioBriefing());
+      const feedItems = (await feed.getFeed()) || [];
+      const toVideoBriefingPromise = feedItems.map(
+        item => item.toAudioBriefing(), // attention: this is an async method
+      );
+      return await Promise.all(toVideoBriefingPromise);
     } catch (e) {
       console.error(e);
       return e;
@@ -49,7 +53,11 @@ server.route({
   path: '/feed_with_video',
   handler: async (request, h) => {
     try {
-      return (await feed.getFeed()).map(feed => feed.toVideoBriefing());
+      const feedItems = (await feed.getFeed()) || [];
+      const toVideoBriefingPromise = feedItems.map(
+        item => item.toVideoBriefing(), // attention: this is an async method
+      );
+      return await Promise.all(toVideoBriefingPromise);
     } catch (e) {
       console.error(e);
       return e;
