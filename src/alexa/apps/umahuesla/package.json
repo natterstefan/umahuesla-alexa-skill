@@ -1,0 +1,14 @@
+{
+  "name": "umahuesla_skill",
+  "version": "0.0.1",
+  "description": "Umahüsla Skill",
+  "main": "index.js",
+  "author": "Stefan Natter <stefan@natter.at>",
+  "license": "MIT",
+  "alexa": {
+    "applicationId": ""
+  },
+  "dependencies": {
+    "alexa-app": "4.2.2"
+  }
+}
