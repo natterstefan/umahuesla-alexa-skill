@@ -114,7 +114,7 @@ Start Crate with `docker-compose up -d`.
 
 Init DB Tables with `v/bin/init_db`.
 
-Configure Env VARS:
+Configure Env VARS (evertime or put it into `.bash_profile`):
 
 ```
 export UH_TWITTER_API_CONSUMER_KEY=...
@@ -128,7 +128,8 @@ expose the other services). Optionally you can set the subdomain by adding
 `yarn start:python --subdomain test123`. This will result in (if subdomain is
 available): https://test123.localtunnel.me
 
-Once the localtunnel is ready export another Env variable with the given localtunnel url.
+Once the localtunnel is ready export another Env variable with the given
+localtunnel url. Set it with every start or put it into `.bash_profile` as well.
 
 ```
 export UH_GQL_SERVER=...
@@ -139,4 +140,5 @@ Example: `export UH_GQL_SERVER="https://gql-magic-3000.localtunnel.me/"`
 Now, start server with `v/bin/server`. Fetches new tweets every 2 minutes (latest 15
 tweets as long as running).
 
-Server exposes on `http:/localhost:9090/gqlui` and on the localtunnel url.
+Server exposes on `http:/localhost:9090/gqlui` and on the localtunnel url. The
+crate console is available at `http://localhost:4200/#/`.

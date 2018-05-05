@@ -52,7 +52,7 @@ class Crawler(Greenlet):
                 tweet = TweetModel(
                     uid=item.id_str,
                     update_date=datetime.fromtimestamp(item.created_at_in_seconds),
-                    title_text=f"{item.user.name} schreibt",
+                    title_text=item.user.name,
                     main_text=alexa_text,
                     stream_id=res,
                     video_url=video_url

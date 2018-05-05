@@ -2,10 +2,10 @@ const axios = require('axios');
 const googleTTS = require('google-tts-api');
 
 class FeedEntry {
-  constructor(id, timestamp, title, content, url = null, videoUrl = null) {
+  constructor(id, timestamp, username, content, url = null, videoUrl = null) {
     this.id = id;
     this.timestamp = timestamp;
-    this.title = title;
+    this.username = username;
     this.content = content;
     this.url = url;
     this.videoUrl = videoUrl;
@@ -45,12 +45,16 @@ class FeedEntry {
       .replace(/https?:\/\/.*[\r\n]*/g, '');
   }
 
+  prepareTitleText(text = '') {
+    return `Tweet von ${text}`;
+  }
+
   toBriefing() {
     // text feed
     return {
       uid: this.id,
       updateDate: this.timestamp.toISOString(),
-      titleText: this.title,
+      titleText: this.prepareTitleText(this.username),
       mainText: this.prepareMainText(this.content),
       redirectionUrl: this.url,
     };
@@ -61,7 +65,7 @@ class FeedEntry {
     return {
       uid: this.id,
       updateDate: this.timestamp.toISOString(),
-      titleText: this.title,
+      titleText: this.prepareTitleText(this.username),
       mainText: this.prepareMainText(this.content),
       redirectionUrl: this.url,
       streamUrl: await this.prepareStreamUrl(this.content),
@@ -73,7 +77,7 @@ class FeedEntry {
     return {
       uid: this.id,
       updateDate: this.timestamp.toISOString(),
-      titleText: this.title,
+      titleText: this.prepareTitleText(this.username),
       mainText: this.prepareMainText(this.content),
       redirectionUrl: this.url,
       videoUrl: this.videoUrl,
@@ -84,7 +88,7 @@ class FeedEntry {
   toSkill() {
     // classic alexa skill
     return {
-      titleText: this.title,
+      titleText: this.prepareTitleText(this.username),
       mainText: this.prepareMainText(this.content),
     };
   }
@@ -92,7 +96,7 @@ class FeedEntry {
   toVideoSkill() {
     return {
       // class alexa skill
-      titleText: this.title,
+      titleText: this.prepareTitleText(this.username),
       videoUrl: this.videoUrl,
       mainText: this.prepareMainText(this.content),
     };

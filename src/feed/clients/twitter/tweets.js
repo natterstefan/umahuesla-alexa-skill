@@ -46,7 +46,7 @@ const fetchFeed = async () => {
     return new FeedEntry(
       tweet.id_str,
       new Date(tweet.created_at),
-      `Tweet von ${tweet.user.name}`,
+      tweet.user.name,
       tweet.full_text,
       url,
       videoUrl,
