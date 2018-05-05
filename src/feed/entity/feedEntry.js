@@ -13,7 +13,7 @@ class FeedEntry {
 
   async prepareTTS(text = '') {
     try {
-      return await googleTTS(text, 'de', 1); // speed normal = 1 (default), slow = 0.24
+      return await googleTTS(text.substr(0, 200), 'de', 1); // speed normal = 1 (default), slow = 0.24
     } catch (err) {
       console.error(err);
       return null;

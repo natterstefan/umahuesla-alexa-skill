@@ -27,15 +27,30 @@ the `.env` file. Otherwise the subdomain will change with every start of the loc
 To setup localtunnel, you need to change the following in `.env`:
 
 ```
+## Ports
 ALEXA_SERVER_PORT=3000
 FEED_SERVER_PORT=8000
+
+## LOCALTUNNEL
 LOCALTUNNEL_ENABLED=true
 LOCALTUNNEL_FEED_DOMAIN=feed3000
 LOCALTUNNEL_ALEXA_DOMAIN=alexa3000
+LOCALTUNNEL_GQL_DOMAIN=gql3000
 ```
 
 The localtunnel url needs to be added as the Alexa-Skill endpoint in the Alexa Skill
 settings.
+
+## GQL Server Setup (node)
+
+Add the following to the `.env`:
+
+```
+## PYTHON SERVER
+GQL_SERVER=http://localhost:9090/gql
+```
+
+The port must match with the gql python server port.
 
 ## Feed & Twitter Setup
 
@@ -100,9 +115,10 @@ export UH_TWITTER_API_ACCESS_TOKEN_KEY=...
 export UH_TWITTER_API_ACCESS_TOKEN_SECRET=...
 ```
 
-Expose the GQL to the world by running `yarn start:python`. Optionally you can
-set the subdomain by adding `yarn start:python --subdomain test123`. This will
-result in (if subdomain is available): https://test123.localtunnel.me
+Expose the GQL to the world by running `yarn start:public` (Note: this will also
+expose the other services). Optionally you can set the subdomain by adding
+`yarn start:python --subdomain test123`. This will result in (if subdomain is
+available): https://test123.localtunnel.me
 
 Once the localtunnel is ready export another Env variable with the given localtunnel url.
 
@@ -110,7 +126,7 @@ Once the localtunnel is ready export another Env variable with the given localtu
 export UH_GQL_SERVER=...
 ```
 
-Example: export UH_GQL_SERVER="https://gql-magic-3000.localtunnel.me/"
+Example: `export UH_GQL_SERVER="https://gql-magic-3000.localtunnel.me/"`
 
 Now, start server with `v/bin/server`. Fetches new tweets every 2 minutes (latest 15
 tweets as long as running).

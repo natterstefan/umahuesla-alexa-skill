@@ -1,5 +1,4 @@
 const Hapi = require('hapi');
-const localtunnel = require('localtunnel');
 const chalk = require('chalk');
 
 // feed generator
@@ -15,6 +14,15 @@ const server = Hapi.server({
 server.route({
   method: 'GET',
   path: '/',
+  handler: function(request, h) {
+    return 'OK';
+  },
+});
+
+// probe status url
+server.route({
+  method: 'GET',
+  path: '/probe_status',
   handler: function(request, h) {
     return 'OK';
   },
@@ -94,33 +102,6 @@ async function start() {
     process.exit(1);
   }
   console.log(chalk.green(`>> LOCAL: feed running at: ${server.info.uri}`));
-}
-
-// Start localtunnel as well
-if (process.env.LOCALTUNNEL_ENABLED === 'true') {
-  const serverPort = process.env.FEED_SERVER_PORT || '8000';
-  const serverDomain = process.env.LOCALTUNNEL_FEED_DOMAIN || undefined;
-  const tunnel = localtunnel(
-    serverPort,
-    { subdomain: serverDomain },
-    (err, onlineTunnel) => {
-      if (err) {
-        process.exit();
-      }
-      console.log(
-        chalk.green(
-          `>> WEB: the feed is available at the following URL: ${
-            onlineTunnel.url
-          }`,
-        ),
-      );
-    },
-  );
-
-  tunnel.on('close', function() {
-    chalk.red('>> WEB: the feed is no longer available on the web.'),
-      process.exit();
-  });
 }
 
 module.exports = {

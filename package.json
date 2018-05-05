@@ -28,9 +28,10 @@
   "scripts": {
     "develop": "nodemon --delay 5000ms src/index.js",
     "develop:alexa": "nodemon src/alexa/server.js",
+    "localtunnel": "node src/localtunnel.js",
     "precommit": "lint-staged",
-    "start": "npm-run-all --parallel start:server start:alexa start:python",
-    "start:python": "./node_modules/.bin/lt --port 9090",
+    "start": "npm-run-all --parallel start:server start:alexa",
+    "start:public": "npm-run-all --parallel localtunnel start",
     "start:server": "node src/index.js",
     "start:alexa": "node src/alexa/server.js"
   },
