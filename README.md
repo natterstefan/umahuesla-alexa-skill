@@ -23,6 +23,20 @@ Once you have followed the setup guides below, you can start the app.
 * (Optional): Expose the services to the world with `yarn start:public`, you then
   do not need to run `yarn start` first.
 
+## Start all services with pm2
+
+One can use pm2 to start the node services and keep them running (eg. with auto
+restart). Some important pm2 commands are listed below:
+
+```
+pm2 start pm2.config.js // starts all node services
+pm2 stop pm2.config.js // stops all node services
+pm2 kill // will kill all processes
+pm2 log // see http://pm2.keymetrics.io/docs/usage/log-management/
+```
+
+You can then omit `yarn start` and `yarn start:public`.
+
 ## Setup
 
 ### Localtunnel Setup
