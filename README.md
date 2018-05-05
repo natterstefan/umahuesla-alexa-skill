@@ -14,11 +14,18 @@ Install the dependencies with
   yarn // or npm install
 ```
 
-## Start all Node-Services
+## Start all Services
 
-Start the app (both the Feed Server and the Alexa Server) with `yarn start`.
+Once you have followed the setup guides below, you can start the app.
 
-## Localtunnel Setup
+* Node: Start the app (both the Feed Server and the Alexa Server) with `yarn start`.
+* Python (gql): start the gql server with `docker-compose up` and `v/bin/server`
+* (Optional): Expose the services to the world with `yarn start:public`, you then
+  do not need to run `yarn start` first.
+
+## Setup
+
+### Localtunnel Setup
 
 We use [localtunnel](https://www.npmjs.com/package/localtunnel) to expose the local
 alexa and feed server to the world. One can configure the localtunnel Subdomain in
@@ -41,7 +48,7 @@ LOCALTUNNEL_GQL_DOMAIN=gql3000
 The localtunnel url needs to be added as the Alexa-Skill endpoint in the Alexa Skill
 settings.
 
-## GQL Server Setup (node)
+### GQL Server Setup (node)
 
 Add the following to the `.env`:
 
@@ -52,7 +59,7 @@ GQL_SERVER=http://localhost:9090/gql
 
 The port must match with the gql python server port.
 
-## Feed & Twitter Setup
+### Feed & Twitter Setup
 
 Setup the `.env` and add the following keys to setup twitter and the feed server:
 
@@ -74,8 +81,9 @@ Available feeds:
 * http://localhost:8000/feed
 * http://localhost:8000/feed_with_audio
 * http://localhost:8000/feed_with_video
+* http://localhost:8000/feed_gql (only works when the python server runs as well)
 
-## Alexa-Skill Setup
+### Alexa-Skill Setup
 
 Setup the `.env` and add the following keys:
 
@@ -87,16 +95,16 @@ ALEXA_SERVER_DOMAIN=localhost
 
 One can then start the alexa server with `yarn start:alexa`
 
-### Setup Video Skill
+#### Setup Video Skill
 
 * https://developer.amazon.com/docs/custom-skills/videoapp-interface-reference.html#configure-your-skill-for-the-videoapp-directives
 
-### Intents and Utterances
+#### Intents and Utterances
 
 Just start the Alexa server and open http://localhost:3000/alexa/umahuesla.
 The intents and utterances are at the bottom of the test-pages.
 
-## Python App Quick Guide
+### Python App Quick Guide
 
 Local environment:
 
