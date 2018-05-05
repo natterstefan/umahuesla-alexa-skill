@@ -8,6 +8,7 @@ from gevent import Greenlet, sleep
 from gtts import gTTS
 
 from .blob import blobs
+from .hashtag import HashtagModel
 from .twitter import get
 from .tweet import TweetModel
 
@@ -22,14 +23,18 @@ class Crawler(Greenlet):
             sleep(120)
 
     def do_it(self):
-        kwargs = {
-            'term': '#uh18 -filter:nativeretweets'
-        }
-        res = get(**kwargs)
-        for item in res:
-            self.store(item)
+        hashtags = HashtagModel.query().filter(
+            HashtagModel.active == True  # noqa
+        ).all()
+        for hashtag in hashtags:
+            kwargs = {
+                'term': f'#{hashtag.tag} -filter:nativeretweets'
+            }
+            res = get(**kwargs)
+            for item in res:
+                self.store(item, hashtag.tag)
 
-    def store(self, item):
+    def store(self, item, hashtag):
         tweet = TweetModel.get(item.id_str)
         if not tweet:
             text = re.sub(r'https?:\/\/.*[\r\n]*', '', item.full_text)
@@ -55,9 +60,13 @@ class Crawler(Greenlet):
                     title_text=item.user.name,
                     main_text=alexa_text,
                     stream_id=res,
-                    video_url=video_url
+                    video_url=video_url,
+                    hashtags=[hashtag]
                 )
                 tweet.add_to_session()
                 tweet.session.flush()
             except Exception as e:
                 logging.error(e.message)
+        elif hashtag not in tweet.hashtags:
+            tweet.hashtags.append(hashtag)
+            tweet.session.flush()

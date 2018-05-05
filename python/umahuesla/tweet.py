@@ -1,6 +1,7 @@
 import graphene
 
 from sqlalchemy import Column, String, Integer, DateTime
+from crate.client.sqlalchemy.types import ObjectArray
 
 from umahuesla.db import Base, BaseModelMixin
 
@@ -18,6 +19,7 @@ class TweetModel(Base, BaseModelMixin):
     main_text = Column(String)
     stream_id = Column(String)
     video_url = Column(String)
+    hashtags = Column(ObjectArray)
 
 
 class Tweet(graphene.ObjectType):
@@ -52,11 +54,15 @@ class Tweet(graphene.ObjectType):
 class Query(object):
 
     latest_tweets = graphene.List(
-        Tweet
+        Tweet,
+        hashtag=graphene.String(),
+        limit=graphene.Int(),
     )
 
-    def resolve_latest_tweets(self, info):
-        items = TweetModel.query().order_by(
+    def resolve_latest_tweets(self, info, hashtag='uh18', limit=5):
+        items = TweetModel.query().filter(
+            TweetModel.hashtags.any(hashtag.lower())
+        ).order_by(
             TweetModel.update_date.desc()
-        ).limit(5).all()
+        ).limit(limit).all()
         return [Tweet(item) for item in items]

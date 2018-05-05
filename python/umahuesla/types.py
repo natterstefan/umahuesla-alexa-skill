@@ -1,6 +1,5 @@
 import graphene
 
-from datetime import datetime
 from graphql.language.ast import StringValue
 from pytz import UTC
 from dateutil.parser import parse
@@ -16,7 +15,6 @@ class DateTime(graphene.Scalar):
 
     @staticmethod
     def serialize(dt):
-        #tz_unaware = datetime.utcfromtimestamp(dt / 1000)
         tz_aware = UTC.localize(dt)
         return tz_aware.isoformat()
 

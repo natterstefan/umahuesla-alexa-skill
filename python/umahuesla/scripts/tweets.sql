@@ -4,7 +4,8 @@ CREATE TABLE IF NOT EXISTS tweets (
   title_text STRING,
   main_text STRING,
   stream_id STRING,
-  video_url STRING
+  video_url STRING,
+  hashtags ARRAY(STRING)
 )
 CLUSTERED INTO {{ tweets and tweets.shards or 3 }} SHARDS
 WITH (

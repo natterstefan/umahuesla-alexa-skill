@@ -16,6 +16,7 @@ def get_sql_scripts():
     return (
         os.path.join(os.path.dirname(__file__), 'user.sql'),
         os.path.join(os.path.dirname(__file__), 'files.sql'),
+        os.path.join(os.path.dirname(__file__), 'hashtags.sql'),
         os.path.join(os.path.dirname(__file__), 'tweets.sql'),
     )
 
