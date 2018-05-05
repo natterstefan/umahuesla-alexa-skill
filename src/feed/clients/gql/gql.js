@@ -19,8 +19,8 @@ const gql = (query, variables) => {
 
 const fetchFeed = async () => {
   const query = `
-    query {
-      latestTweets {
+    query ($hashtag: String) {
+      latestTweets (hashtag: $hashtag){
         uid
         titleText
         mainText
@@ -30,7 +30,12 @@ const fetchFeed = async () => {
       }
     }
   `;
-  const res = await gql(query);
+
+  const variables = {
+    hashtag: 'uh18',
+  };
+
+  const res = await gql(query, variables);
   return _.get(res, 'data.data.latestTweets', []) || [];
 };
 

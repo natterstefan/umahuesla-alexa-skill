@@ -29,13 +29,13 @@ One can use pm2 to start the node services and keep them running (eg. with auto
 restart). Some important pm2 commands are listed below:
 
 ```
-pm2 start pm2.config.js // starts all node services
-pm2 stop pm2.config.js // stops all node services
+pm2 start pm2/pm2.config.js // starts all node services
+pm2 stop pm2/pm2.config.js // stops all node services
 pm2 kill // will kill all processes
 pm2 log // see http://pm2.keymetrics.io/docs/usage/log-management/
 ```
 
-You can then omit `yarn start` and `yarn start:public`.
+You can then omit `yarn start`. For `yarn start:public` use `pm2/pm2-public.config.js`.
 
 ## Setup
 
